@@ -72,6 +72,7 @@ public class MaintenancePanel extends Dialog {
 	private WarningDisplay validPswd;
 	private WarningDisplay invalidPswd;
 	private MaintenanceController mctrl;
+        private Button loginTouchID;
 
 	/**
 	 * This constructor creates an instance of MaintenancePanel object.
@@ -83,11 +84,16 @@ public class MaintenancePanel extends Dialog {
 
 		mctrl = mc;
 
+                loginTouchID=new Button("Simulate the TouchID login");
+                TouchIDListener touch = new TouchIDListener(mc.getAccessManager());
+                loginTouchID.addActionListener(touch);
+                
 		// north part
 		Label lb = new Label(TITLE);
 		lb.setFont(new Font("Helvetica", Font.BOLD, 24));
 		Panel tp1 = new Panel();
-		tp1.add(lb);
+		tp1.add(loginTouchID);
+                tp1.add(lb);
 
 		Panel tpn = new Panel();
 		tpn.setLayout(new GridLayout(0, 1));
@@ -99,9 +105,11 @@ public class MaintenancePanel extends Dialog {
 		Panel tp3 = new Panel();
 		validPswd = new WarningDisplay("Valid Password");
 		invalidPswd = new WarningDisplay("Invalid Password");
-		tp3.add(validPswd);
+		
+                tp3.add(validPswd);
 		tp3.add(invalidPswd);
 		tpn.add(tp1);
+		tpn.add(loginTouchID);
 		tpn.add(password);
 		tpn.add(tp3);
 
