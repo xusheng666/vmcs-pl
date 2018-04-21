@@ -18,6 +18,7 @@ import java.awt.Panel;
 import java.awt.event.ActionListener;
 
 import sg.edu.nus.iss.vmcs.util.WarningDisplay;
+import sg.edu.nus.iss.vmcs.util.WarningDisplayWithNumber;
 
 /**
  * This boundary object enables a drink to be displayed and selected&#46; 
@@ -29,6 +30,7 @@ public class DrinkSelectionItem extends Panel{
 	private Button btn=new Button("");
 	private Label lbl=new Label();
 	private WarningDisplay wnd=new WarningDisplay("Not in Stock");
+	private WarningDisplayWithNumber wndNum=new WarningDisplayWithNumber(""+getQuantity() +" Remaining");
 	
 	private int drinkIdentifier=-1;
 	private String name="";
@@ -47,6 +49,7 @@ public class DrinkSelectionItem extends Panel{
 	public DrinkSelectionItem(int drinkIdentifier, String drinkName, int drinkPrice, int quantity, boolean isActive, boolean isWarningOn){
 		this.setDrinkIdentifier(drinkIdentifier);
 		this.setName(drinkName);
+//                this.setQuantity(quantity);
 		this.setPrice(drinkPrice);
 		this.setState(isActive);
 		this.setItemState(isWarningOn);
@@ -70,7 +73,12 @@ public class DrinkSelectionItem extends Panel{
 		add(lbl,new GridBagConstraints(1,0,1,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.NONE,
 			    new Insets(5,15,0,0),50,0));
-		add(wnd,new GridBagConstraints(2,0,1,1,0.0,0.0,
+//		add(wnd,new GridBagConstraints(2,0,1,1,0.0,0.0,
+//			    GridBagConstraints.WEST,GridBagConstraints.NONE,
+//			    new Insets(5,4,0,0),10,0));
+
+                wndNum=new WarningDisplayWithNumber(""+getQuantity() +" Remaining");
+		add(wndNum,new GridBagConstraints(2,0,1,1,0.0,0.0,
 			    GridBagConstraints.WEST,GridBagConstraints.NONE,
 			    new Insets(5,4,0,0),10,0));
 	}
@@ -172,6 +180,8 @@ public class DrinkSelectionItem extends Panel{
 		btn.setEnabled(!isOn);
 		btn.setBackground(this.getBackground());
 		wnd.setState(isOn);
+		wndNum.setState(isOn, getQuantity());
+                
 	}
 	
 	/**
