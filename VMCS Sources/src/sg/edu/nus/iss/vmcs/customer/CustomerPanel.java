@@ -94,6 +94,7 @@ public class CustomerPanel extends Dialog {
     private LabelledValue lbdTotalMoneyInserted=new LabelledValue("Total Money Inserted:","0 C",50);
     private WarningDisplay wndNoChangeAvailable=new WarningDisplay("No Change Available");
     private Button btnTerminate=new Button("Terminate and Return Cash");
+    private Button btnPaybyNets=new Button("Insert Nets Card for the Payment");
     private LabelledValue lbdCollectCoins=new LabelledValue("Collect Coins:","0 C",50);
     private LabelledValue lbdCollectCan=new LabelledValue("Collect Can Here:","",100);
     
@@ -122,10 +123,12 @@ public class CustomerPanel extends Dialog {
 		coinInputBox=new CoinInputBox(txCtrl);
 		drinkSelectionBox=new DrinkSelectionBox(txCtrl);
 		TerminateButtonListener terminateButtonListener=new TerminateButtonListener(txCtrl);
+		PaybyNetsButtonListener paybyNetsButtonListener=new PaybyNetsButtonListener(txCtrl);
 		
 		coinInputBox.setActive(false);
 		drinkSelectionBox.setActive(true);
 		
+		btnPaybyNets.addActionListener(paybyNetsButtonListener);
 		btnTerminate.addActionListener(terminateButtonListener);
 		
 		lblTitle.setAlignment(Label.CENTER);
@@ -144,19 +147,22 @@ public class CustomerPanel extends Dialog {
 		pan0.add(lbdTotalMoneyInserted,new GridBagConstraints(0,3,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(drinkSelectionBox,new GridBagConstraints(0,4,0,1,0.0,0.0,
+                pan0.add(btnPaybyNets,new GridBagConstraints(0,4,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(wndNoChangeAvailable,new GridBagConstraints(0,5,0,1,0.0,0.0,
+		pan0.add(drinkSelectionBox,new GridBagConstraints(0,5,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(btnTerminate,new GridBagConstraints(0,6,0,1,0.0,0.0,
+		pan0.add(wndNoChangeAvailable,new GridBagConstraints(0,6,0,1,0.0,0.0,
+			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
+			    new Insets(5,0,0,0),10,0));
+		pan0.add(btnTerminate,new GridBagConstraints(0,7,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.NONE,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(lbdCollectCoins,new GridBagConstraints(0,7,0,1,0.0,0.0,
+		pan0.add(lbdCollectCoins,new GridBagConstraints(0,8,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(lbdCollectCan,new GridBagConstraints(0,8,0,1,0.0,0.0,
+		pan0.add(lbdCollectCan,new GridBagConstraints(0,9,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(2,0,20,0),10,0));
 		

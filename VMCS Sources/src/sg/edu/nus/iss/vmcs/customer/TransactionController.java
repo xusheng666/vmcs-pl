@@ -16,10 +16,13 @@ package sg.edu.nus.iss.vmcs.customer;
  */
 
 import java.awt.Frame;
+import sg.edu.nus.iss.vmcs.store.Coin;
 
 import sg.edu.nus.iss.vmcs.store.DrinksBrand;
 import sg.edu.nus.iss.vmcs.store.Store;
+import sg.edu.nus.iss.vmcs.store.StoreController;
 import sg.edu.nus.iss.vmcs.store.StoreItem;
+import sg.edu.nus.iss.vmcs.store.StoreObject;
 import sg.edu.nus.iss.vmcs.system.MainController;
 import sg.edu.nus.iss.vmcs.system.SimulatorControlPanel;
 
@@ -209,6 +212,31 @@ public class TransactionController {
 		System.out.println("CancelTransaction: End");
 	}
 	
+        /**
+	 * This method will cancel an ongoing customer transaction.
+	 */
+	public void completeNetsTransaction(TransactionController cctrl, int drinkIndex){
+		System.out.println("CompleteNetsTransaction: Begin");
+		coinReceiver.stopReceive();
+		dispenseCtrl.allowSelection(true);
+                
+//                MainController mainCtrl=cctrl.getMainController();
+                StoreController storeCtrl=mainCtrl.getStoreController();
+                StoreItem cashStoreItem=storeCtrl.getStore(Store.DRINK).getStoreItem(drinkIndex);
+                cashStoreItem.setQuantity(cashStoreItem.getQuantity()-1);
+//		int quantity = cashStoreItem.getQuantity();
+//                quantity--;
+                
+                StoreObject storeObject = cashStoreItem.getContent();
+                DrinksBrand drinksBrand = (DrinksBrand) storeObject;
+                String drinksName = drinksBrand.getName();
+                int price = drinksBrand.getPrice();
+                int quantity = cashStoreItem.getQuantity();
+                cctrl.getCustomerPanel().getDrinkSelectionBox().update(drinkIndex, quantity, price, drinksName);
+		System.out.println("quantity:"+cashStoreItem.getQuantity());
+		System.out.println("CompleteNetsTransaction: End");
+	}
+        
 	/**
 	 * This method refreshes the CustomerPanel when maintainer logs-out.
 	 */
