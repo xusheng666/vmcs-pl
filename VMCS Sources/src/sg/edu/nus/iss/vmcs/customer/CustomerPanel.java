@@ -128,6 +128,7 @@ public class CustomerPanel extends Dialog {
 		coinInputBox.setActive(false);
 		drinkSelectionBox.setActive(true);
 		
+                btnPaybyNets.setEnabled(false);
 		btnPaybyNets.addActionListener(paybyNetsButtonListener);
 		btnTerminate.addActionListener(terminateButtonListener);
 		
@@ -335,6 +336,14 @@ public class CustomerPanel extends Dialog {
 	 */
 	public void setTerminateButtonActive(boolean active){
 		btnTerminate.setEnabled(active);
+	}
+	/**
+	 * This method activates or deactivates the Nets Payment Button
+	 * @param active the active status of the Terminate Button; TRUE to activate,
+	 * FALSE to deactivate it.
+	 */
+	public void setNetsPaymentButtonActive(boolean active){
+		btnPaybyNets.setEnabled(active);
 	}
 	
 	/**

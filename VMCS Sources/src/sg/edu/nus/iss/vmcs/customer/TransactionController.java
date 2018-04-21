@@ -108,6 +108,7 @@ public class TransactionController {
 		dispenseCtrl.allowSelection(false);
 		coinReceiver.startReceiver();
 		custPanel.setTerminateButtonActive(true);
+                custPanel.setNetsPaymentButtonActive(true);
 	}
 	
 	/**
@@ -208,6 +209,9 @@ public class TransactionController {
 		coinReceiver.stopReceive();
 		coinReceiver.refundCash();
 		dispenseCtrl.allowSelection(true);
+                if(custPanel!=null){
+			custPanel.setNetsPaymentButtonActive(false);
+		}
 		refreshMachineryDisplay();
 		System.out.println("CancelTransaction: End");
 	}
