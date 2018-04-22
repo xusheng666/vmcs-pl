@@ -17,14 +17,14 @@ import java.awt.*;
  * @version 3.0 5/07/2003
  * @author Olivo Miotto, Pang Ping Li
  */
-public class TouchIDListener implements ActionListener {
+public class InvalidCardListener implements ActionListener {
 	AccessManager actrl;
 
 	/**
 	 * This constructor creates an instance of the PasswordListener.
 	 * @param ac the AccessManager.
 	 */
-	public TouchIDListener(AccessManager ac) {
+	public InvalidCardListener(AccessManager ac) {
 		actrl = ac;
 	}
 	
@@ -32,8 +32,7 @@ public class TouchIDListener implements ActionListener {
 	 * This method performs actions in response to the password text field being entered.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		
-		actrl.processPassword("1");
-                actrl.displayInvalidCardState(false);
+                actrl.displayInvalidCardState(true);
+                actrl.forcelogout();
 	}
 }//End of class PasswordListener

@@ -73,6 +73,8 @@ public class MaintenancePanel extends Dialog {
 	private WarningDisplay invalidPswd;
 	private MaintenanceController mctrl;
         private Button loginTouchID;
+        private Button btnInvalidCard;
+        private WarningDisplay wndInvalidCard;
 
 	/**
 	 * This constructor creates an instance of MaintenancePanel object.
@@ -84,15 +86,23 @@ public class MaintenancePanel extends Dialog {
 
 		mctrl = mc;
 
-                loginTouchID=new Button("Simulate the TouchID login");
+                loginTouchID=new Button("Simulate Access via Keycard");
                 TouchIDListener touch = new TouchIDListener(mc.getAccessManager());
                 loginTouchID.addActionListener(touch);
+                
+                btnInvalidCard=new Button("Simulate Invalid Keycard");
+                wndInvalidCard=new WarningDisplay("Invalid Keycard access");
+                InvalidCardListener invalid = new InvalidCardListener(mc.getAccessManager());
+                btnInvalidCard.addActionListener(invalid);
+                
+                Panel cardPl =new Panel(new FlowLayout(FlowLayout.CENTER));
+                cardPl.add(loginTouchID);
+                cardPl.add(btnInvalidCard);
                 
 		// north part
 		Label lb = new Label(TITLE);
 		lb.setFont(new Font("Helvetica", Font.BOLD, 24));
 		Panel tp1 = new Panel();
-		tp1.add(loginTouchID);
                 tp1.add(lb);
 
 		Panel tpn = new Panel();
@@ -109,7 +119,8 @@ public class MaintenancePanel extends Dialog {
                 tp3.add(validPswd);
 		tp3.add(invalidPswd);
 		tpn.add(tp1);
-		tpn.add(loginTouchID);
+		tpn.add(cardPl);
+                tpn.add(wndInvalidCard);
 		tpn.add(password);
 		tpn.add(tp3);
 
@@ -216,6 +227,19 @@ public class MaintenancePanel extends Dialog {
 		} else {
 			validPswd.setState(false);
 			invalidPswd.setState(true);
+		}
+
+	}
+	/**
+	 * This method displays a message indicating the VALID or INVALID password status.
+	 * @param st if TRUE then highlight VALID password status, otherwise, highlight
+	 * INVALID password status.
+	 */
+	public void displayInvalidCardState(boolean st) {
+		if (st == true) {
+			wndInvalidCard.setState(true);
+		} else {
+			wndInvalidCard.setState(false);
 		}
 
 	}

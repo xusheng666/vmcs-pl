@@ -91,6 +91,7 @@ public class MaintenanceController {
 	 */
 	public void loginMaintainer(boolean st) {
 		mpanel.displayPasswordState(st);
+		
 		mpanel.clearPassword();
 		if (st == true) {
 			// login successful
@@ -100,9 +101,14 @@ public class MaintenanceController {
 			machctrl.setDoorState(false);
 			//Terminate customer transaction
 			mCtrl.getTransactionController().terminateTransaction();
+                        mpanel.displayInvalidCardState(false);
 		}
 	}
 
+        public void displayInvalidCard(boolean st) {
+		mpanel.displayInvalidCardState(st);
+	}
+        
 	/**
 	 * This method will be used to get the total number of coins of a selected denomination&#46
 	 * This method invoked in CoinDisplayListener.
@@ -228,6 +234,24 @@ public class MaintenanceController {
 			msg.setLocation(500, 500);
 			return;
 		}
+
+		mpanel.setActive(MaintenancePanel.DIALOG, true);
+		
+		//Refresh Customer Panel
+		CustomerPanel custPanel=mCtrl.getTransactionController().getCustomerPanel();
+		if(custPanel==null){
+			mCtrl.getSimulatorControlPanel().setActive(SimulatorControlPanel.ACT_CUSTOMER, true);
+		}
+		else{
+			mCtrl.getTransactionController().refreshCustomerPanel();
+		}
+	}
+        
+        public void forceLogout() {
+
+		MachineryController machctrl = mCtrl.getMachineryController();
+
+		machctrl.closeMachineryPanel();
 
 		mpanel.setActive(MaintenancePanel.DIALOG, true);
 		
