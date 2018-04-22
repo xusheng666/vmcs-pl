@@ -13,6 +13,8 @@ import junit.framework.TestSuite;
  */
 public class AllTests {
 	public static TestSuite suite() throws Exception {
+                VMCSTestUtil.setPropertyFileName();
+            
 		  TestSuite suite=new TestSuite("Store Tests");
 		  suite.addTestSuite(CashStoreItemTest.class);
 		  suite.addTestSuite(CashStoreTest.class);
