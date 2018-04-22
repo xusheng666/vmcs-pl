@@ -102,6 +102,7 @@ public class MaintenanceController {
 			//Terminate customer transaction
 			mCtrl.getTransactionController().terminateTransaction();
                         mpanel.displayInvalidCardState(false);
+                        mpanel.displayValidCardState(false);
 		}
 	}
 
