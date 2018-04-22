@@ -47,5 +47,6 @@ public class PaybyNetsButtonListener implements ActionListener{
                     txCtrl.getCustomerPanel().displayNoBalanceCard(true);
                     txCtrl.getCustomerPanel().displayInvalidCard(false);
                 }
+                txCtrl.refreshCustomerPanel();
 	}
 }//End of class TerminateButtonListener

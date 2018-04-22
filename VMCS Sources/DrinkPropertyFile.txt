@@ -1,5 +1,5 @@
 #
-#Sun Apr 22 13:21:25 SGT 2018
+#Sun Apr 22 14:35:01 SGT 2018
 Name6=Soya Bean
 Name5=Coca-Cola
 Name4=Soya Bean
@@ -11,8 +11,8 @@ Quantity6=12
 Quantity5=12
 Quantity4=12
 Quantity3=12
-Quantity2=7
-Quantity1=1
+Quantity2=6
+Quantity1=0
 Price6=90
 Price5=100
 Price4=90

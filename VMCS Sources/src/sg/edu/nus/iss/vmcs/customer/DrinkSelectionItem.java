@@ -29,7 +29,7 @@ import sg.edu.nus.iss.vmcs.util.WarningDisplayWithNumber;
 public class DrinkSelectionItem extends Panel{
 	private Button btn=new Button("");
 	private Label lbl=new Label();
-	private WarningDisplay wnd=new WarningDisplay("Not in Stock");
+	private WarningDisplay wnd=new WarningDisplay("Out Of Stock");
 	private WarningDisplayWithNumber wndNum=new WarningDisplayWithNumber(""+getQuantity() +" Remaining");
 	
 	private int drinkIdentifier=-1;

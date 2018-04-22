@@ -138,9 +138,9 @@ public class CustomerPanel extends Dialog {
                 btnPaybyNets.setEnabled(false);
 		btnPaybyNets.addActionListener(paybyNetsButtonListener);
                 btnInvalidCard.setEnabled(false);
-		btnInvalidCard.addActionListener(paybyNetsButtonListener);
+		btnInvalidCard.addActionListener(invalidCardListener);
                 btnNoBalanceCard.setEnabled(false);
-		btnNoBalanceCard.addActionListener(paybyNetsButtonListener);
+		btnNoBalanceCard.addActionListener(noBalanceCardListener);
                 
 		btnTerminate.addActionListener(terminateButtonListener);
 		
