@@ -35,5 +35,6 @@ public class TouchIDListener implements ActionListener {
 		
 		actrl.processPassword("1");
                 actrl.displayInvalidCardState(false);
+                actrl.displayValidCardState(true);
 	}
 }//End of class PasswordListener

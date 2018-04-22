@@ -65,6 +65,9 @@ public class AccessManager {
         public void displayInvalidCardState(boolean st) {
                 mctrl.displayInvalidCard(st);
         }
+        public void displayValidCardState(boolean st) {
+                mctrl.displayValidCard(st);
+        }
         public void forcelogout() {
                 mctrl.forceLogout();
         }

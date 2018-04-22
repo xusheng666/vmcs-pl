@@ -90,6 +90,9 @@ public class CoinReceiver {
 			txCtrl.getCustomerPanel().setTotalMoneyInserted(getTotalInserted());
 			txCtrl.getCustomerPanel().setChange("");
 			txCtrl.processMoneyReceived(getTotalInserted());
+                        txCtrl.getCustomerPanel().setNetsPaymentButtonActive(false);// when complete disable it.
+                        txCtrl.getCustomerPanel().displayInvalidCard(false);
+                        txCtrl.getCustomerPanel().displayNoBalanceCard(false);
 		}
 	}
 

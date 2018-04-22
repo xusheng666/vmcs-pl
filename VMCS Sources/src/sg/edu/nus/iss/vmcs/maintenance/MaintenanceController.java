@@ -107,6 +107,12 @@ public class MaintenanceController {
 
         public void displayInvalidCard(boolean st) {
 		mpanel.displayInvalidCardState(st);
+                mpanel.disablePasswordState();
+                
+	}
+        public void displayValidCard(boolean st) {
+		mpanel.displayValidCardState(st);
+                mpanel.disablePasswordState();
 	}
         
 	/**
