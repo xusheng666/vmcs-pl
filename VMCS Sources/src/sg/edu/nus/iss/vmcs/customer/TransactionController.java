@@ -109,6 +109,9 @@ public class TransactionController {
 		coinReceiver.startReceiver();
 		custPanel.setTerminateButtonActive(true);
                 custPanel.setNetsPaymentButtonActive(true);
+                custPanel.displayInvalidCoin(false);
+                custPanel.displayInvalidCard(false);
+                custPanel.displayNoBalanceCard(false);
 	}
 	
 	/**
@@ -211,6 +214,9 @@ public class TransactionController {
 		dispenseCtrl.allowSelection(true);
                 if(custPanel!=null){
 			custPanel.setNetsPaymentButtonActive(false);
+			custPanel.displayInvalidCard(false);
+			custPanel.displayNoBalanceCard(false);
+			custPanel.displayInvalidCoin(false);
 		}
 		refreshMachineryDisplay();
 		System.out.println("CancelTransaction: End");
@@ -239,6 +245,11 @@ public class TransactionController {
                 cctrl.getCustomerPanel().getDrinkSelectionBox().update(drinkIndex, quantity, price, drinksName);
 		System.out.println("quantity:"+cashStoreItem.getQuantity());
 		System.out.println("CompleteNetsTransaction: End");
+                
+                if(custPanel!=null){
+			custPanel.displayInvalidCard(false);
+			custPanel.displayNoBalanceCard(false);
+		}
 	}
         
 	/**

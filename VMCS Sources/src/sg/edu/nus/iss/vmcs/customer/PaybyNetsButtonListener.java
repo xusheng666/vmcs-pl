@@ -36,8 +36,16 @@ public class PaybyNetsButtonListener implements ActionListener{
 	 * This method performs actions in response to the terminate button being pressed.
 	 */
 	public void actionPerformed(ActionEvent ev){
+                String command = ev.getActionCommand();
                 int drinkIndex = txCtrl.getSelection();
-                
-		txCtrl.completeNetsTransaction(txCtrl, drinkIndex);
+                if("Simulate Inserting NETS Card".equalsIgnoreCase(command)){
+                    txCtrl.completeNetsTransaction(txCtrl, drinkIndex);
+                }else if("Simulate Invalid NETS Card".equalsIgnoreCase(command)){
+                    txCtrl.getCustomerPanel().displayInvalidCard(true);
+                    txCtrl.getCustomerPanel().displayNoBalanceCard(false);
+                }else{
+                    txCtrl.getCustomerPanel().displayNoBalanceCard(true);
+                    txCtrl.getCustomerPanel().displayInvalidCard(false);
+                }
 	}
 }//End of class TerminateButtonListener

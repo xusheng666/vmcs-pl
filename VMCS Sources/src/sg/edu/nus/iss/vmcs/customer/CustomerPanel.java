@@ -20,6 +20,7 @@ import java.awt.Button;
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
@@ -95,6 +96,10 @@ public class CustomerPanel extends Dialog {
     private WarningDisplay wndNoChangeAvailable=new WarningDisplay("No Change Available");
     private Button btnTerminate=new Button("Terminate and Return Cash");
     private Button btnPaybyNets=new Button("Simulate Inserting NETS Card");
+    private Button btnInvalidCard=new Button("Simulate Invalid NETS Card");
+    private Button btnNoBalanceCard=new Button("Simulate No Balance NETS Card");
+    private WarningDisplay wndInvalidCard=new WarningDisplay("Invalid Card");
+    private WarningDisplay wndNoBalCard=new WarningDisplay("No Balance Card");
     private LabelledValue lbdCollectCoins=new LabelledValue("Collect Coins:","0 C",50);
     private LabelledValue lbdCollectCan=new LabelledValue("Collect Can Here:","",100);
     
@@ -124,17 +129,33 @@ public class CustomerPanel extends Dialog {
 		drinkSelectionBox=new DrinkSelectionBox(txCtrl);
 		TerminateButtonListener terminateButtonListener=new TerminateButtonListener(txCtrl);
 		PaybyNetsButtonListener paybyNetsButtonListener=new PaybyNetsButtonListener(txCtrl);
+		PaybyNetsButtonListener invalidCardListener=new PaybyNetsButtonListener(txCtrl);
+		PaybyNetsButtonListener noBalanceCardListener=new PaybyNetsButtonListener(txCtrl);
 		
 		coinInputBox.setActive(false);
 		drinkSelectionBox.setActive(true);
 		
                 btnPaybyNets.setEnabled(false);
 		btnPaybyNets.addActionListener(paybyNetsButtonListener);
+                btnInvalidCard.setEnabled(false);
+		btnInvalidCard.addActionListener(paybyNetsButtonListener);
+                btnNoBalanceCard.setEnabled(false);
+		btnNoBalanceCard.addActionListener(paybyNetsButtonListener);
+                
 		btnTerminate.addActionListener(terminateButtonListener);
 		
 		lblTitle.setAlignment(Label.CENTER);
 		lblTitle.setFont(new Font("Helvetica", Font.BOLD, 24));
 		
+                Panel cardPl =new Panel(new FlowLayout(FlowLayout.CENTER));
+                cardPl.add(btnPaybyNets);
+                cardPl.add(btnInvalidCard);
+                cardPl.add(btnNoBalanceCard);
+                
+                Panel warningPl =new Panel(new FlowLayout(FlowLayout.CENTER));
+                warningPl.add(wndInvalidCard);
+                warningPl.add(wndNoBalCard);
+                
 		pan0.setLayout(new GridBagLayout());
 		pan0.add(lblEnterCoins,new GridBagConstraints(0,0,1,1,1.0,0.0,
 			    GridBagConstraints.WEST,GridBagConstraints.HORIZONTAL,
@@ -148,22 +169,25 @@ public class CustomerPanel extends Dialog {
 		pan0.add(lbdTotalMoneyInserted,new GridBagConstraints(0,3,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-                pan0.add(btnPaybyNets,new GridBagConstraints(0,4,0,1,0.0,0.0,
+                pan0.add(cardPl,new GridBagConstraints(0,4,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(drinkSelectionBox,new GridBagConstraints(0,5,0,1,0.0,0.0,
+                pan0.add(warningPl,new GridBagConstraints(0,5,0,1,1.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(wndNoChangeAvailable,new GridBagConstraints(0,6,0,1,0.0,0.0,
+		pan0.add(drinkSelectionBox,new GridBagConstraints(0,6,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(btnTerminate,new GridBagConstraints(0,7,0,1,0.0,0.0,
+		pan0.add(wndNoChangeAvailable,new GridBagConstraints(0,7,0,1,0.0,0.0,
+			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
+			    new Insets(5,0,0,0),10,0));
+		pan0.add(btnTerminate,new GridBagConstraints(0,8,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.NONE,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(lbdCollectCoins,new GridBagConstraints(0,8,0,1,0.0,0.0,
+		pan0.add(lbdCollectCoins,new GridBagConstraints(0,9,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(5,0,0,0),10,0));
-		pan0.add(lbdCollectCan,new GridBagConstraints(0,9,0,1,0.0,0.0,
+		pan0.add(lbdCollectCan,new GridBagConstraints(0,10,0,1,0.0,0.0,
 			    GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,
 			    new Insets(2,0,20,0),10,0));
 		
@@ -302,6 +326,20 @@ public class CustomerPanel extends Dialog {
 	public void displayInvalidCoin(boolean isOn){
 		wndInvalidCoin.setState(isOn);
 	}
+	/**
+	 * This method turning On or Off the "Invalid Coin" highlight.
+	 * @param isOn TRUE to turn on the highlight, otherwise, turn off the highlight.
+	 */
+	public void displayInvalidCard(boolean isOn){
+		wndInvalidCard.setState(isOn);
+	}
+	/**
+	 * This method turning On or Off the "Invalid Coin" highlight.
+	 * @param isOn TRUE to turn on the highlight, otherwise, turn off the highlight.
+	 */
+	public void displayNoBalanceCard(boolean isOn){
+		wndNoBalCard.setState(isOn);
+	}
 	
 	/**
 	 * This method turning On or Off the "No Change Available" highlight.
@@ -344,6 +382,8 @@ public class CustomerPanel extends Dialog {
 	 */
 	public void setNetsPaymentButtonActive(boolean active){
 		btnPaybyNets.setEnabled(active);
+		btnInvalidCard.setEnabled(active);
+		btnNoBalanceCard.setEnabled(active);
 	}
 	
 	/**
