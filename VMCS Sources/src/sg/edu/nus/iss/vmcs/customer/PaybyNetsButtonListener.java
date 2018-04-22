@@ -40,6 +40,9 @@ public class PaybyNetsButtonListener implements ActionListener{
                 int drinkIndex = txCtrl.getSelection();
                 if("Simulate Inserting NETS Card".equalsIgnoreCase(command)){
                     txCtrl.completeNetsTransaction(txCtrl, drinkIndex);
+                    txCtrl.getCustomerPanel().setNetsPaymentButtonActive(false);// when complete disable it.
+                    txCtrl.getCustomerPanel().displayInvalidCard(false);
+                    txCtrl.getCustomerPanel().displayNoBalanceCard(false);
                 }else if("Simulate Invalid NETS Card".equalsIgnoreCase(command)){
                     txCtrl.getCustomerPanel().displayInvalidCard(true);
                     txCtrl.getCustomerPanel().displayNoBalanceCard(false);
@@ -48,5 +51,6 @@ public class PaybyNetsButtonListener implements ActionListener{
                     txCtrl.getCustomerPanel().displayInvalidCard(false);
                 }
                 txCtrl.refreshCustomerPanel();
+                
 	}
 }//End of class TerminateButtonListener
