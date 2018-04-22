@@ -61,13 +61,22 @@ public class StoreViewer extends Panel {
 		this.add(pl);
 
 		for (int i = 0; i < sSize; i++) {
+                    Panel newPanel = new Panel(new GridLayout(1, 2));
+                        Button autodetect = new Button("Simulate Auto Detect Drinks");
 			String name = storeItem[i].getContent().getName();
 			viewItems[i] = new LabelledDisplay(name,
 						LabelledDisplay.DEFAULT,
 						LabelledDisplay.GRID);
 			viewItems[i].addListener(
                         new StoreViewerListener(type, i, storeCtrl));
-			this.add(viewItems[i]);
+			
+                        newPanel.add(viewItems[i]);
+//                        this.add(viewItems[i]);
+                        
+                        autodetect.addActionListener(new AutoDectectListener(type, i, storeCtrl, viewItems[i], this));
+                        
+                        newPanel.add(autodetect); 
+                        this.add(newPanel); 
 		}
 		
 		update();

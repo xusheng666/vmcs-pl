@@ -18,11 +18,14 @@ import java.awt.*;
  * @author Olivo Miotto, Pang Ping Li
  */
 import sg.edu.nus.iss.vmcs.store.StoreController;
+import sg.edu.nus.iss.vmcs.util.LabelledDisplay;
 
-public class StoreViewerListener implements ActionListener {
+public class AutoDectectListener implements ActionListener {
 	private int type;
 	private int item;
 	private StoreController storeCtrl;
+	private LabelledDisplay viewItem;
+        private StoreViewer sv;
 
 	/**
 	 * This constructor creates an instance of StoreViewerListener object.
@@ -30,23 +33,24 @@ public class StoreViewerListener implements ActionListener {
 	 * @param item the store item.
 	 * @param sctrl the StoreController.
 	 */
-	public StoreViewerListener(int type, int item, StoreController sctrl) {
+	public AutoDectectListener(int type, int item, StoreController sctrl, LabelledDisplay inviewitem, StoreViewer storeViewer) {
 		this.type = type;
 		this.item = item;
 		storeCtrl = sctrl;
+                viewItem = inviewitem;
+                sv = storeViewer;
 	}
 	
 	/**
 	 * This method performs actions in response to the data being entered to the store viewer.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		TextField vf;
 		int qty;
 		String sqty;
 
-		vf = (TextField) e.getSource();
-		sqty = vf.getText();
+		sqty = viewItem.getValue();
 		qty = Integer.parseInt(sqty)+1;
 		storeCtrl.changeStoreQty(type, item, qty);
+                sv.update();
 	}
 }//End of class StoreViewerListener

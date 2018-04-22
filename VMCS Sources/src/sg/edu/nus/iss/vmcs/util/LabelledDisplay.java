@@ -7,6 +7,7 @@
  */
 package sg.edu.nus.iss.vmcs.util;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -52,6 +53,7 @@ public class LabelledDisplay extends Panel {
 		value = new TextField();
 		value.setColumns(length);
 
+                
 		tp.add(value);
 
 		this.add(lb);
@@ -78,6 +80,14 @@ public class LabelledDisplay extends Panel {
 		}
 	}
 	
+	/**
+	 * This method get the value from the text field in the LabelledDisplay&#46;
+	 * @param vl the value to be get from the text field&#46;
+	 */
+	public String getValue() {
+		return value.getText();
+	}
+        
 	/**
 	 * This method set the value to the text field in the LabelledDisplay&#46;
 	 * @param vl the value to be set to the text field&#46;

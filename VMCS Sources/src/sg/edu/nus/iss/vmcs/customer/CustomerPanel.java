@@ -94,7 +94,7 @@ public class CustomerPanel extends Dialog {
     private LabelledValue lbdTotalMoneyInserted=new LabelledValue("Total Money Inserted:","0 C",50);
     private WarningDisplay wndNoChangeAvailable=new WarningDisplay("No Change Available");
     private Button btnTerminate=new Button("Terminate and Return Cash");
-    private Button btnPaybyNets=new Button("Insert Nets Card for the Payment");
+    private Button btnPaybyNets=new Button("Simulate Inserting NETS Card");
     private LabelledValue lbdCollectCoins=new LabelledValue("Collect Coins:","0 C",50);
     private LabelledValue lbdCollectCan=new LabelledValue("Collect Can Here:","",100);
     
